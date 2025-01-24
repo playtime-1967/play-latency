@@ -19,3 +19,7 @@ path = "src/http1_server.rs"
 name = "htc1"
 path = "src/http1_client.rs"
 
+[[bin]] # echo server
+name = "echo"
+path = "src/echo_server.rs"
+

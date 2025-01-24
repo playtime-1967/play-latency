@@ -35,6 +35,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 //When the processing of this future is complete, it will resolve to a Response or an error.
 async fn hello_service(
     request: Request<hyper::body::Incoming>,
+    //std::convert::Infallible: A type used to indicate a situation where no error can occur.
 ) -> Result<Response<Full<Bytes>>, Infallible> {
     println!("request {:?}", request);
     Ok(Response::new(Full::new(Bytes::from(

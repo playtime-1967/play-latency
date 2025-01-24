@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             hyper::header::HOST,
             url.authority().unwrap().clone().as_str(),
         )
-        .body(Empty::<Bytes>::new())?; //
+        .body(Empty::<Bytes>::new())?;
 
     let mut res = sender.send_request(req).await?;
 
@@ -63,4 +63,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
 //How to run
 //1- cargo run --bin hts1  //the http1 server 127.0.0.1:3000
-//2-  cargo run --bin htc1 127.0.0.1:3000  //the client
+//2- cargo run --bin htc1 127.0.0.1:3000  //the client
