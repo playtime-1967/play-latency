@@ -9,15 +9,16 @@ hyper = { version = "1", features = ["full"] }
 tokio = { version = "1", features = ["full"] }
 http-body-util = "0.1"
 hyper-util = { version = "0.1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 
+[[bin]] # hello_server
+name = "hs"
+path = "src/hello_server.rs"
 
-[[bin]] # http1_server
-name = "hts1"
-path = "src/http1_server.rs"
-
-[[bin]] # http1_client
-name = "htc1"
-path = "src/http1_client.rs"
+[[bin]] # http_client
+name = "hc"
+path = "src/http_client.rs"
 
 [[bin]] # echo server
 name = "echo"

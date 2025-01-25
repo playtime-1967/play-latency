@@ -1,8 +1,10 @@
 use http_body_util::BodyExt;
 use http_body_util::Empty;
+use hyper::body::Buf;
 use hyper::body::Bytes;
 use hyper::Request;
 use hyper_util::rt::TokioIo;
+use serde::Deserialize;
 use std::env;
 use tokio::io::{self, AsyncWriteExt as _};
 use tokio::net::TcpStream;
@@ -16,8 +18,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             return Ok(());
         }
     };
-    let url = url.parse::<hyper::Uri>().unwrap();
+    let is_json = match env::args().nth(2) {
+        Some(is) => is,
+        None => {
+            println!("Usage: client <url> <is_json>");
+            return Ok(());
+        }
+    }
+    .parse::<bool>()
+    .unwrap();
 
+    let url = url.parse::<hyper::Uri>().unwrap();
     let host = url.host().expect("uri has no host");
     let port = url.port_u16().unwrap_or(80);
 
@@ -40,27 +51,44 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     });
 
     // Create an HTTP request with an empty body and a HOST header
+    let authority = url.authority().unwrap().clone();
     let req = Request::builder()
-        .header(
-            hyper::header::HOST,
-            url.authority().unwrap().clone().as_str(),
-        )
+        .uri(url)
+        .header(hyper::header::HOST, authority.as_str())
         .body(Empty::<Bytes>::new())?;
 
     let mut res = sender.send_request(req).await?;
 
     println!("Response status: {}", res.status());
 
-    //Stream the body, writing each frame to stdout as it arrives.
-    while let Some(next) = res.frame().await {
-        let frame = next?;
-        if let Some(chunk) = frame.data_ref() {
-            io::stdout().write_all(&chunk).await?;
+    if is_json {
+        let body = res.collect().await?.aggregate();
+        //from_reader(): The content of the I/O stream is deserialized directly from the stream without being buffered in memory
+        let users: Vec<User> = serde_json::from_reader(body.reader())?;
+        println!("users: {:?}", users);
+    } else {
+        //Stream the body, writing each frame to stdout as it arrives.
+        while let Some(next) = res.frame().await {
+            let frame = next?;
+            if let Some(chunk) = frame.data_ref() {
+                io::stdout().write_all(&chunk).await?;
+            }
         }
     }
+
     Ok(())
 }
 
+#[derive(Deserialize, Debug)]
+struct User {
+    #[allow(unused)]
+    id: i32,
+    #[allow(unused)]
+    name: String,
+}
+
 //How to run
-//1- cargo run --bin hts1  //the http1 server 127.0.0.1:3000
-//2- cargo run --bin htc1 127.0.0.1:3000  //the client
+//1- cargo run --bin hs  //the hello server Listening to 127.0.0.1:3000
+//2- cargo run --bin hc 127.0.0.1:3000 false  //the client and is_json_de
+// To show json deserilaizer feture:
+//cargo run --bin hc http://jsonplaceholder.typicode.com/users true //the client
