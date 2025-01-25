@@ -32,8 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let host = url.host().expect("uri has no host");
     let port = url.port_u16().unwrap_or(80);
 
-    let addr = format!("{}:{}", host, port);
-    let stream = TcpStream::connect(addr).await?;
+    let stream = TcpStream::connect(format!("{}:{}", host, port)).await?;
 
     // Use an adapter to access something implementing `tokio::io` traits as if they implement `hyper::rt` IO traits.
     let io = TokioIo::new(stream);
@@ -65,7 +64,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         let body = res.collect().await?.aggregate();
         //from_reader(): The content of the I/O stream is deserialized directly from the stream without being buffered in memory
         let users: Vec<User> = serde_json::from_reader(body.reader())?;
-        println!("users: {:?}", users);
+        println!("users: {:#?}", users);
     } else {
         //Stream the body, writing each frame to stdout as it arrives.
         while let Some(next) = res.frame().await {

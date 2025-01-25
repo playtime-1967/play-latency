@@ -24,3 +24,7 @@ path = "src/http_client.rs"
 name = "echo"
 path = "src/echo_server.rs"
 
+[[bin]] # reverse proxy
+name = "proxy"
+path = "src/reverse_proxy.rs"
+

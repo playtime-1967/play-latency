@@ -39,6 +39,6 @@ async fn hello_service(
 ) -> Result<Response<Full<Bytes>>, Infallible> {
     println!("request {:?}", request);
     Ok(Response::new(Full::new(Bytes::from(
-        "Hello, HTTP1 Server! \n",
+        "Hello, dear client! I'm here to assist you with anything you need! \n",
     ))))
 }
