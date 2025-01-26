@@ -11,6 +11,7 @@ http-body-util = "0.1"
 hyper-util = { version = "0.1", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+console-subscriber = "=0.4"
 
 [[bin]] # hello_server
 name = "hs"

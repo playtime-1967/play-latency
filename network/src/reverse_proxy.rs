@@ -5,6 +5,8 @@ use tokio::net::{TcpListener, TcpStream};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    console_subscriber::init();
+
     let in_addr: SocketAddr = ([127, 0, 0, 1], 3001).into();
     let out_addr: SocketAddr = ([127, 0, 0, 1], 3000).into();
 
