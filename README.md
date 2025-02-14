@@ -118,6 +118,14 @@ cargo run --bin http-client <URL> <is_json>
 cargo run --bin http-client http://127.0.0.1:5948 false
 ```
 
+**Output:**  
+```
+Response status: 200 OK
+Welcome, We have the following endpoints: 
+ POST echo, POST echo/uppercase, POST echo/reverse
+```
+
+
 ##### Example 2: Fetching JSON and Parsing It  
 
 ```sh
