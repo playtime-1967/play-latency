@@ -18,9 +18,8 @@ name = "echo-server"
 path = "src/echo_server.rs"
 
 [[bin]] # http_client
-name = "hc"
+name = "http-client"
 path = "src/http_client.rs"
-
 
 [[bin]] # reverse proxy
 name = "proxy"
