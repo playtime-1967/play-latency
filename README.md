@@ -101,7 +101,7 @@ cargo run --bin echo-server
 ```
 **Server Output:**  
 ```
-Listening to 127.0.0.1:5984
+Listening to 127.0.0.1:5948
 ```
 
 #### 2. Run the HTTP Client  
@@ -109,7 +109,7 @@ Listening to 127.0.0.1:5984
 ```sh
 cargo run --bin http-client <URL> <is_json>
 ```
-- **`<URL>`**: The target HTTP server (e.g., `127.0.0.1:5984`).  
+- **`<URL>`**: The target HTTP server (e.g., `127.0.0.1:5948`).  
 - **`<is_json>`**: `true` (to parse JSON) or `false` (to stream raw data).  
 
 ##### Example 1: Basic Request (Streaming Response)  
