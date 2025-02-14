@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "e535a8fd-685f-432b-81f7-383fe38a79d4",
+		"name": "play-latency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27466622"
+	},
+	"item": [
+		{
+			"name": "echo/welcome",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5948",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5948"
+				},
+				"description": "Generated from cURL: curl --location --request GET 'http://127.0.0.1:3000/' \\ --header 'Content-Type: application/json' \\"
+			},
+			"response": []
+		},
+		{
+			"name": "echo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"echo play-latency\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5948/echo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5948",
+					"path": [
+						"echo"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request GET 'http://127.0.0.1:3000/' \\ --header 'Content-Type: application/json' \\"
+			},
+			"response": []
+		},
+		{
+			"name": "echo/uppercase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"echo play-latency\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5948/echo/uppercase",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5948",
+					"path": [
+						"echo",
+						"uppercase"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request GET 'http://127.0.0.1:3000/' \\ --header 'Content-Type: application/json' \\"
+			},
+			"response": []
+		},
+		{
+			"name": "echo/reverse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"echo play-latency\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5948/echo/reverse",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5948",
+					"path": [
+						"echo",
+						"reverse"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request GET 'http://127.0.0.1:3000/' \\ --header 'Content-Type: application/json' \\"
+			},
+			"response": []
+		},
+		{
+			"name": "echo/unknown",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"echo play-latency\"",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5948/echo/unknown",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5948",
+					"path": [
+						"echo",
+						"unknown"
+					]
+				},
+				"description": "Generated from cURL: curl --location --request GET 'http://127.0.0.1:3000/' \\ --header 'Content-Type: application/json' \\"
+			},
+			"response": []
+		}
+	]
+}

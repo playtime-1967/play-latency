@@ -3,7 +3,6 @@ name = "network"
 version = "0.1.0"
 edition = "2021"
 
-
 [dependencies]
 hyper = { version = "1", features = ["full"] }
 tokio = { version = "1", features = ["full"] }
@@ -20,8 +19,4 @@ path = "src/echo_server.rs"
 [[bin]] # http_client
 name = "http-client"
 path = "src/http_client.rs"
-
-[[bin]] # reverse proxy
-name = "proxy"
-path = "src/reverse_proxy.rs"
 
