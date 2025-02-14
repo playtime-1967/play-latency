@@ -2,7 +2,7 @@
 
 # 1- HTTP Echo Server
 
-This project demonstrates an HTTP server built using the low-level [Hyper](https://hyper.rs/) library. The server supports basic request routing and processes incoming HTTP requests.  
+Demonstrate an HTTP server built using the low-level [Hyper](https://hyper.rs/) library. The server supports basic request routing and processes incoming HTTP requests.  
 
 ## Features  
 
@@ -72,4 +72,69 @@ curl -X POST http://127.0.0.1:5948/unknown
 **Response:**  
 ```
 404 Not Found
+```
+
+
+---
+
+# 2- HTTP Client   
+
+ Handle HTTP/1.1 requests over a **raw TCP connection**, making it useful for learning how HTTP clients work under the hood.  
+
+## Features  
+
+- **Raw TCP connection:** Uses `TcpStream` for manual HTTP communication.  
+- **Hyper HTTP/1.1 Client:** Implements request handling via **Hyper's HTTP client API**.  
+- **Supports JSON Responses:** Automatically deserializes JSON responses into Rust structs.  
+- **Streaming Response Body:** Supports both **JSON deserialization** and **raw data streaming**.  
+
+
+## Steps to run  
+
+`cd network/`
+
+#### 1. Start a Sample HTTP Server  
+To test the client, you can use the included **echo server**:  
+
+```sh
+cargo run --bin echo-server
+```
+**Server Output:**  
+```
+Listening to 127.0.0.1:5984
+```
+
+#### 2. Run the HTTP Client  
+
+```sh
+cargo run --bin http-client <URL> <is_json>
+```
+- **`<URL>`**: The target HTTP server (e.g., `127.0.0.1:5984`).  
+- **`<is_json>`**: `true` (to parse JSON) or `false` (to stream raw data).  
+
+##### Example 1: Basic Request (Streaming Response)  
+
+```sh
+cargo run --bin http-client http://127.0.0.1:5948 false
+```
+
+##### Example 2: Fetching JSON and Parsing It  
+
+```sh
+cargo run --bin http-client http://jsonplaceholder.typicode.com/users true
+```
+
+**Output:**  
+```
+Response status: 200 OK
+users: [
+    {
+        "id": 1,
+        "name": "Leanne Graham"
+    },
+    {
+        "id": 2,
+        "name": "Ervin Howell"
+    }
+]
 ```
